@@ -5,8 +5,9 @@ function App() {
   const [listaDeTarefas, setListaDeTarefas] = useState([])
 
   function salvarTarefa(event){
-    event.preventDefault()
-    alert("Salvo com sucesso")
+    event.preventDefault();
+    setListaDeTarefas([...listaDeTarefas, tarefa]);
+    setTarefa('')
   }
 
   return (
@@ -15,7 +16,7 @@ function App() {
       
       <form onSubmit={salvarTarefa}>
         <label>Tarefa:</label><br/>
-        <input placeholder = "Digite a tarefa"></input><br/><br/>
+        <input placeholder = "Digite a tarefa" value={tarefa} onChange={(event) => setTarefa(event.target.value)}></input><br/><br/>
         <button type="submit">Salvar Tarefa</button>
       </form>
 
@@ -23,7 +24,7 @@ function App() {
         <h1>Lista de Tarefas:</h1>
         <ul>
           {listaDeTarefas.map(tarefa => (
-            <li>{tarefa}</li>
+            <li key={tarefa}> {tarefa} </li>
           ))}
         </ul>
       </div>
