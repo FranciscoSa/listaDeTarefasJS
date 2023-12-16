@@ -1,8 +1,20 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 function App() {
   const [tarefa, setTarefa] = useState('')
   const [listaDeTarefas, setListaDeTarefas] = useState([])
+
+  useEffect(() => {
+    const tarefasLocalStorage = localStorage.getItem("@tarefas")
+
+    if(tarefasLocalStorage) {
+      setListaDeTarefas(JSON.parse(tarefasLocalStorage))
+    }
+  }, []);
+
+  useEffect(()=>{
+    localStorage.setItem("@tarefas", JSON.stringify(listaDeTarefas))
+  }, [listaDeTarefas]);
 
   function salvarTarefa(event){
     event.preventDefault();
